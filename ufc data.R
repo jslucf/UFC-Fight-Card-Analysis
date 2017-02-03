@@ -34,14 +34,17 @@ sub_12=c()
 ko_12 =c()
 tko_12 = c()
 
-# Simulate a typical 12-fight card for how many finishes will be on each show
+# Simulate a typical 12-fight card for how many finishes will be on each show. Set the simulation parameters.
 iterations=100000
 set.seed(1)
+
+# Set number of fights on the card
+n_fights = 12
 
 for (i in 1:iterations){
   
   # create sample 12-fight card  
-  sample = sample(fights_method_subset$method, 12, replace=T)
+  sample = sample(fights_method_subset$method, n_fights, replace=T)
   
   # assign no. of finishes of each type to a vector  
   for(method in methods){  
@@ -104,5 +107,5 @@ ggplot(card_12, aes(x=n, y= ..density.., col=finish)) + geom_freqpoly(binwidth=1
 finishes_freq = card_12 %>% group_by(finish, n) %>% summarize(number = n(), percent = number/nrow(card_12)) %>% 
   arrange(desc(percent))
 
-#Filter for just decisions. How likely is it that there are 8 decisions on a card?
+#Filter for just decisions How likely is it that there are 8 decisions on a card?
 dec_freq = finishes_freq %>% filter(finish == "dec")
