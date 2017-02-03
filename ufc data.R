@@ -102,10 +102,10 @@ ggplot(card_12, aes(x=n, y= ..density.., col=finish)) + geom_freqpoly(binwidth=1
 ggplot(card_12, aes(x=n, y= ..density.., col=finish)) + geom_freqpoly(binwidth=1, lwd=2) + 
   scale_x_continuous(breaks=0:12)
 
-
+    
 # Calculate the frequency table for number of finishes
-finishes_freq = card_12 %>% group_by(finish, n) %>% summarize(number = n(), percent = number/nrow(card_12)) %>% 
-  arrange(desc(percent))
+finishes_freq = card_12 %>% group_by(finish, n) %>% summarize(number = n(), 
+  percent = number/iterations) %>% arrange(desc(percent))
 
 #Filter for just decisions How likely is it that there are 8 decisions on a card?
 dec_freq = finishes_freq %>% filter(finish == "dec")
